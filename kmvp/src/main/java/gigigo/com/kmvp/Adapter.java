@@ -26,7 +26,13 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author Juan Godínez Vera - 4/26/2017.
+ * Defines the adapter with base functionality
+ *
+ * @param <T> data type to use
+ *
+ * @author Juan Godínez Vera - 12/22/2016
+ * @version 2.0.0
+ * @since 1.0.0
  */
 public abstract class Adapter<T>
         extends RecyclerView.Adapter<ViewHolder<T>>
@@ -83,7 +89,7 @@ public abstract class Adapter<T>
      */
     @Override
     public void add(T item) {
-        add(Collections.singletonList(item));
+        addRange(Collections.singletonList(item));
     }
 
     /**
@@ -92,7 +98,7 @@ public abstract class Adapter<T>
      * @param items
      */
     @Override
-    public void add(Iterable<T> items) {
+    public void addRange(Iterable<T> items) {
         if(items == null) return;
 
         for (T item : items) {
@@ -139,7 +145,15 @@ public abstract class Adapter<T>
      */
     @Override
     public Iterable<T> where(IPredicate<T> predicate) {
-        return null;
+        if(isEmpty()) return null;
+        List<T> result = new ArrayList<>();
+        for(T item : itemsSource) {
+            if(predicate.apply(item)) {
+                result.add(item);
+            }
+        }
+
+        return result;
     }
 
     /**

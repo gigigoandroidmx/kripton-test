@@ -42,8 +42,8 @@ public abstract class ViewHolder<T>
     }
 
     /**
-     *
-     * @param actionCommand
+     * Sets the action command when the item view is invoked
+     * @param actionCommand command to invoke
      */
     public void setActionCommand(final IAction actionCommand) {
         if(actionCommand != null) {
@@ -57,32 +57,32 @@ public abstract class ViewHolder<T>
     }
 
     /**
-     *
-     * @param item
+     * Binds the data at the specified view items
+     * @param item the data to bind
      */
     public void onBindViewHolder(@NonNull T item) {
         this.item = item;
     }
 
     /**
-     *
-     * @return
+     * Gets the current item
+     * @return current item
      */
     public T getItem() {
         return this.item;
     }
 
     /**
-     *
-     * @return
+     * Gets the context
+     * @return context
      */
     public Context getContext() {
         return this.context;
     }
 
     /**
-     *
-     * @param message
+     * Shows the toast view
+     * @param message message to show
      */
     public void showToastMessage(String message) {
         Toast toast = Toast.makeText(this.context, message, Toast.LENGTH_LONG);

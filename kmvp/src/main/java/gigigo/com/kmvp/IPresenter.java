@@ -15,10 +15,6 @@
 
 package gigigo.com.kmvp;
 
-/**
- * @author Juan Godínez Vera - 4/26/2017.
- */
-
 import android.support.annotation.UiThread;
 
 /**

@@ -35,7 +35,7 @@ public interface IEnumerable<T> {
      * Adds the elements of the specified collection to the end of the sequence
      * @param items
      */
-    void add(Iterable<T> items);
+    void addRange(Iterable<T> items);
 
     /**
      * Updates the first occurrence of a specific object from the sequence

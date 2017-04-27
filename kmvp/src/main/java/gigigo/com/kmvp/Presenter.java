@@ -27,7 +27,6 @@ import java.lang.ref.WeakReference;
  * @author Daniel Moises Ruiz Pérez - 2/21/2017.
  * @version 2.0.0
  * @since 1.0.0
- *
  */
 public class Presenter<V extends IView>
         implements IPresenter<V> {
