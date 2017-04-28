@@ -28,7 +28,7 @@ import java.lang.ref.WeakReference;
  * @version 2.0.0
  * @since 1.0.0
  */
-public class Presenter<V extends IView>
+public abstract class KPresenter<V extends IView>
         implements IPresenter<V> {
 
     protected final String TAG = getClass().getSimpleName();

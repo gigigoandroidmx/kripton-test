@@ -34,8 +34,8 @@ import java.util.List;
  * @version 2.0.0
  * @since 1.0.0
  */
-public abstract class Adapter<T>
-        extends RecyclerView.Adapter<ViewHolder<T>>
+public abstract class KAdapter<T>
+        extends RecyclerView.Adapter<KViewHolder<T>>
         implements IEnumerable<T> {
 
     private List<T> itemsSource = new ArrayList<>();
@@ -47,7 +47,7 @@ public abstract class Adapter<T>
      * @param position position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(ViewHolder<T> holder, int position) {
+    public void onBindViewHolder(KViewHolder<T> holder, int position) {
         if(isEmpty()) return;
         holder.onBindViewHolder(itemsSource.get(position));
     }

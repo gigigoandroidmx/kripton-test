@@ -30,13 +30,13 @@ import android.widget.Toast;
  * @version 2.0.0
  * @since 1.0.0
  */
-public abstract class ViewHolder<T>
+public abstract class KViewHolder<T>
         extends RecyclerView.ViewHolder {
 
     private T item;
     private Context context;
 
-    public ViewHolder(View itemView) {
+    public KViewHolder(View itemView) {
         super(itemView);
         context = itemView.getContext();
     }
