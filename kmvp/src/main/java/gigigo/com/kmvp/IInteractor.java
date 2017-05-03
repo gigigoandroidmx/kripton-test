@@ -38,5 +38,5 @@ public interface IInteractor {
      * @param <T> the type of data to gets
      * @return the actual data type
      */
-    <T> T execute();
+    <T> T execute()/* throws Throwable*/;
 }

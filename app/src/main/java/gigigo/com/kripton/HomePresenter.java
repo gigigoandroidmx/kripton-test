@@ -8,7 +8,17 @@ import gigigo.com.kmvp.KPresenter;
 public class HomePresenter
         extends KPresenter<IViewHome> {
 
+    private final HomeInteractor interactor;
+
+    public HomePresenter(HomeInteractor interactor) {
+        this.interactor = interactor;
+    }
+
     public void getMessage() {
-        getView().showMessage("Hello Kripton 2.0!");
+        if(!isViewAttached()) return;
+
+        String message = this.interactor.execute();
+
+        getView().showMessage(message);
     }
 }

@@ -38,8 +38,7 @@ public abstract class KAdapter<T>
         extends RecyclerView.Adapter<KViewHolder<T>>
         implements IEnumerable<T> {
 
-    private List<T> itemsSource = new ArrayList<>();
-
+    private ArrayList<T> itemsSource = new ArrayList<>();
 
     /**
      * Called by RecyclerView to display the data at the specified position
@@ -171,7 +170,7 @@ public abstract class KAdapter<T>
      * @return
      */
     @Override
-    public Iterable<T> items() {
+    public ArrayList<T> items() {
         return itemsSource;
     }
 
