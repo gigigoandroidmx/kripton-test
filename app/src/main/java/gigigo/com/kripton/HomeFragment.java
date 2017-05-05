@@ -27,6 +27,7 @@ public class HomeFragment
     @Override
     public void onResume() {
         super.onResume();
+        presenter.forceUpdate(true);
         presenter.getMessage();
     }
 
@@ -72,5 +73,15 @@ public class HomeFragment
         if(s != null) {
 
         }
+    }
+
+    @Override
+    public void showError(Throwable exception) {
+
+    }
+
+    @Override
+    public void showProgressIndicator(boolean active) {
+
     }
 }

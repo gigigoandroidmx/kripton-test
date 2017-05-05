@@ -8,6 +8,7 @@ import gigigo.com.kmvp.Interactor;
 public class HomeInteractor
         extends Interactor {
 
+    private String data;
 
     /**
      * Defines the method to be called when the presenter invokes the data source
@@ -16,7 +17,15 @@ public class HomeInteractor
      */
     @Override
     public <T> T execute() {
-        return (T) "Hello Kripton 2.0!!!";
+        if(data == null) {
+            data = "Hello Kripton 2.0!!!";
+        }
+        return (T) data;
+    }
+
+    @Override
+    public void refreshData() {
+        data = null;
     }
 
     public String getMessage(String name) {

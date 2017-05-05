@@ -39,4 +39,9 @@ public interface IInteractor {
      * @return the actual data type
      */
     <T> T execute()/* throws Throwable*/;
+
+    /**
+     * Defines the method to be invoked when needs refresh the data source
+     */
+    void refreshData();
 }
