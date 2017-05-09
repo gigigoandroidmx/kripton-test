@@ -31,6 +31,7 @@ import java.util.List;
  * @param <T> data type to use
  *
  * @author Juan Godínez Vera - 12/22/2016
+ * @author Adan Gutierrez Ortiz - 9/5/2017
  * @version 2.0.0
  * @since 1.0.0
  */
@@ -38,7 +39,7 @@ public abstract class KAdapter<T>
         extends RecyclerView.Adapter<KViewHolder<T>>
         implements IEnumerable<T> {
 
-    private ArrayList<T> itemsSource = new ArrayList<>();
+    private ArrayList<T> itemsSource = new ArrayList<T>();
 
     /**
      * Called by RecyclerView to display the data at the specified position
@@ -108,6 +109,61 @@ public abstract class KAdapter<T>
     }
 
     /**
+     * Adds the array elements of the specified collection to the end of the sequence
+     *
+     * @param items
+     */
+    @Override
+    public void addRange(T... items) {
+        if(items == null) return;
+
+        for (T item : items) {
+            itemsSource.add(item);
+        }
+
+        notifyDataSetChanged();
+    }
+
+    /**
+     * Replaces the elements of the specified collection on the sequence
+     *
+     * @param items
+     */
+    @Override
+    public void set(Iterable<T> items) {
+        if(items == null) return;
+
+        ArrayList<T> arrayList = new ArrayList();
+
+        for(T item : items) {
+            arrayList.add(item);
+        }
+
+        itemsSource = arrayList;
+
+        notifyDataSetChanged();
+    }
+
+    /**
+     * Replaces the array elements of the specified collection on the sequence
+     *
+     * @param items
+     */
+    @Override
+    public void set(T... items) {
+        if(items == null) return;
+
+        ArrayList<T> arrayList = new ArrayList(items.length);
+
+        for(T item : items) {
+            arrayList.add(item);
+        }
+
+        itemsSource = arrayList;
+        notifyDataSetChanged();
+    }
+
+    /**
      * Updates the first occurrence of a specific object from the sequence
      *
      * @param item
@@ -130,9 +186,19 @@ public abstract class KAdapter<T>
     public void remove(T item) {
         if(isEmpty()) return;
         int position = itemsSource.indexOf(item);
-        if(position == -1) return;
-        itemsSource.remove(position);
-        notifyItemRemoved(position);
+        remove(position);
+    }
+
+    /**
+     * Removes the object at the specified position in the sequence
+     *
+     * @param index
+     */
+    @Override
+    public void remove(int index) {
+        if(index == -1) return;
+        itemsSource.remove(index);
+        notifyItemRemoved(index);
         notifyDataSetChanged();
     }
 

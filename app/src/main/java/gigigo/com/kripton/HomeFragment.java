@@ -61,7 +61,12 @@ public class HomeFragment
     public void showMessage(String message) {
         textViewMessage.setText(message);
         adapter.clear();
-        adapter.addRange(Arrays.asList("Hello", "World!", "How", "Are", "You", "Hello2", "World!2", "How2", "Are2", "You2"));
+
+       String[] sdata = { "Hello", "World!", "How", "Are", "You" };
+       adapter.addRange(sdata);
+
+
+        //adapter.addRange(Arrays.asList("Hello", "World!", "How", "Are", "You", "Hello2", "World!2", "How2", "Are2", "You2"));
 
         Iterable<String> s = adapter.where(new IPredicate<String>() {
             @Override

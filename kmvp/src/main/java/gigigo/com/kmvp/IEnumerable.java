@@ -21,10 +21,12 @@ package gigigo.com.kmvp;
  * @param <T> data type to use
  *
  * @author Juan Godínez Vera - 4/26/2017
+ * @author Adan Gutierrez Ortiz - 9/5/2017
  * @version 2.0.0
  * @since 2.0.0
  */
 public interface IEnumerable<T> {
+
     /**
      * Adds an object to the end of the sequence
      * @param item
@@ -38,6 +40,24 @@ public interface IEnumerable<T> {
     void addRange(Iterable<T> items);
 
     /**
+     * Adds the array elements of the specified collection to the end of the sequence
+     * @param items
+     */
+    void addRange(T... items);
+
+    /**
+     * Replaces the elements of the specified collection on the sequence
+     * @param items
+     */
+    void set(Iterable<T> items);
+
+    /**
+     * Replaces the array elements of the specified collection on the sequence
+     * @param items
+     */
+    void set(T... items);
+
+    /**
      * Updates the first occurrence of a specific object from the sequence
      * @param item
      */
@@ -48,6 +68,12 @@ public interface IEnumerable<T> {
      * @param item
      */
     void remove(T item);
+
+    /**
+     * Removes the object at the specified position in the sequence
+     * @param index
+     */
+    void remove(int index);
 
     /**
      * Retrieves all the elements that match the conditions defined by the specified predicate.

@@ -2,10 +2,6 @@ package gigigo.com.kripton;
 
 import gigigo.com.kmvp.KPresenter;
 
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-
 
 /**
  * @author Juan Godínez Vera - 4/28/2017.
@@ -33,8 +29,5 @@ public class HomePresenter
 
         getView().showMessage(message);
 
-
-//        this.interactor.getMessage("Juan")
-//                .observeOn(AndroidSchedulers.mainThread())
     }
 }
