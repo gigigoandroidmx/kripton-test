@@ -15,6 +15,7 @@
 
 package gigigo.com.kmvp;
 
+import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -39,7 +40,12 @@ public abstract class KAdapter<T>
         extends RecyclerView.Adapter<KViewHolder<T>>
         implements IEnumerable<T> {
 
-    private ArrayList<T> itemsSource = new ArrayList<T>();
+    protected ArrayList<T> itemsSource = new ArrayList<>();
+    protected Context mContext;
+
+    public KAdapter(Context context) {
+        this.mContext = context;
+    }
 
     /**
      * Called by RecyclerView to display the data at the specified position
@@ -240,5 +246,31 @@ public abstract class KAdapter<T>
         return itemsSource;
     }
 
+    /**
+     * Insert element into a specific position when used Header or Footer
+     *
+     * @param position
+     */
+    protected void notifyItemInsertedHF(int position){
+        notifyItemInserted(position);
+    }
+
+    /**
+     * Remove item at a specific position when used Header or Footer
+     *
+     * @param position
+     */
+    protected void notifyItemRemovedHF(int position){
+        notifyItemRemoved(position);
+    }
+
+    /**
+     * Update element at a specific position when used Header or Footer
+     *
+     * @param position
+     */
+    protected void notifyItemChangedHF(int position){
+        notifyItemChanged(position);
+    }
     //endregion
 }

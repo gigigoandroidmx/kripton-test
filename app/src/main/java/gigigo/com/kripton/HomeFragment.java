@@ -1,18 +1,14 @@
 package gigigo.com.kripton;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import java.util.Arrays;
-import java.util.Iterator;
+import java.util.ArrayList;
 
 import gigigo.com.kmvp.IPredicate;
-import gigigo.com.kmvp.KAdapter;
 import gigigo.com.kmvp.KFragment;
 
 
@@ -41,12 +37,20 @@ public class HomeFragment
         textViewMessage = (TextView) root.findViewById(R.id.textview_message);
         recyclerView = (RecyclerView) root.findViewById(R.id.recyclerview);
 
-        adapter = new HomeAdapter();
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL,
                 false));
+
+        adapter = new HomeAdapter(getActivity());
         recyclerView.setAdapter(adapter);
+
+        //add header
+        View headerView = LayoutInflater.from(getActivity()).inflate(R.layout.item_home_header, recyclerView, false);
+        adapter.setHeaderView(headerView);
+
+        View footerrView = LayoutInflater.from(getActivity()).inflate(R.layout.item_home_footer, recyclerView, false);
+        adapter.setFooterView(footerrView);
     }
 
     @Override
@@ -60,10 +64,9 @@ public class HomeFragment
     @Override
     public void showMessage(String message) {
         textViewMessage.setText(message);
-        adapter.clear();
 
        String[] sdata = { "Hello", "World!", "How", "Are", "You" };
-       adapter.addRange(sdata);
+       adapter.set(sdata);
 
 
         //adapter.addRange(Arrays.asList("Hello", "World!", "How", "Are", "You", "Hello2", "World!2", "How2", "Are2", "You2"));
@@ -78,6 +81,13 @@ public class HomeFragment
         if(s != null) {
 
         }
+
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i= 0; i < 10; i++) {
+            arrayList.add(String.valueOf(i));
+        }
+
+        adapter.addRange(arrayList);
     }
 
     @Override
