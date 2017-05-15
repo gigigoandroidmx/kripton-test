@@ -1,18 +1,35 @@
+/* Copyright (c) 2016 Gigigo Android Development Team México
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package gigigo.com.kmvp;
 
-import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by adan.gutierrez on 10/05/17.
+ * Defines the adapter with base functionality
+ *
+ * @param <T> data type to use
+ * @param <VH> view holder, must be inherited from {@link KViewHolder}
+ *
+ * @author Adan Gutierrez Ortiz - 5/10/2017
+ * @version 2.0.0
+ * @since 2.0.0
  */
-
-public  abstract class KBaseAdapterHF<T, VH extends KViewHolder<T>> extends KAdapter<T> {
-
-    public KBaseAdapterHF(Context context) {
-        super(context);
-    }
+public abstract class KHeaderFooterAdapter<T, VH extends KViewHolder<T>>
+        extends KAdapter<T> {
 
     private static final int TYPE_HEADER = Integer.MAX_VALUE;
     private static final int TYPE_FOOTER = Integer.MAX_VALUE - 1;
@@ -46,6 +63,7 @@ public  abstract class KBaseAdapterHF<T, VH extends KViewHolder<T>> extends KAda
             notifyDataSetChanged();
         }
     }
+
     public void removeFooter(){
         if (footerViewHolder != null){
             footerViewHolder = null;
@@ -69,17 +87,15 @@ public  abstract class KBaseAdapterHF<T, VH extends KViewHolder<T>> extends KAda
         return dataPosition + (hasHeader() ? 1 : 0);
     }
 
-    @Override
-    public void notifyItemInsertedHF(int itemPosition) {
+    public void onItemInserted(int itemPosition) {
         notifyItemInserted(itemPositionInRV(itemPosition));
     }
-    @Override
-    public void notifyItemRemovedHF(int itemPosition) {
+
+    public void onItemRemoved(int itemPosition) {
         notifyItemRemoved(itemPositionInRV(itemPosition));
     }
 
-    @Override
-    public void notifyItemChangedHF(int itemPosition) {
+    public void onItemChanged(int itemPosition) {
         notifyItemChanged(itemPositionInRV(itemPosition));
     }
 
@@ -90,13 +106,14 @@ public  abstract class KBaseAdapterHF<T, VH extends KViewHolder<T>> extends KAda
         } else if (viewType == TYPE_FOOTER) {
             return footerViewHolder;
         }
-        return onCreateViewHolderHF(parent, viewType);
+        return onCreateViewHolderHeaderFooter(parent, viewType);
     }
 
     @Override
     public void onBindViewHolder(KViewHolder<T> holder, int position) {
-        if (!isHeader(position) && !isFooter(position))
-            onBindDataItemViewHolder((VH)holder, itemPositionInData(position));
+        if (!isEmpty() && !isHeader(position) && !isFooter(position)) {
+            holder.onBindViewHolder(items().get(itemPositionInData(position)));
+        }
     }
 
     @Override
@@ -148,7 +165,5 @@ public  abstract class KBaseAdapterHF<T, VH extends KViewHolder<T>> extends KAda
         return footerViewHolder != null;
     }
 
-    public abstract VH onCreateViewHolderHF(ViewGroup parent, int viewType);
-
-    public abstract void onBindDataItemViewHolder(VH holder, int position);
+    public abstract VH onCreateViewHolderHeaderFooter(ViewGroup parent, int viewType);
 }
