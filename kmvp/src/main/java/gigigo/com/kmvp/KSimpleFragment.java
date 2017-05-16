@@ -9,28 +9,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.lang.reflect.ParameterizedType;
-
 /**
  * Defines the Fragment with base functionality, must be inherited from {@link Fragment}
  *
- * @param <V> view interface, must be inherited from {@link IView}
- * @param <P> presenter interface, must be inherited from {@link IPresenter}
- *
- * @author Juan Godínez Vera - 28/04/2017
+ * @author Alan Espinosa - 16/05/2017
  * @version 2.0.0
- * @since 1.0.0
  */
-public abstract class KFragment<V extends IView, P extends IPresenter<V>>
+public abstract class KSimpleFragment
         extends Fragment {
-
-    protected P presenter;
 
     @LayoutRes
     protected abstract int getLayoutResourceId();
     protected abstract void onBindView(View root);
     protected abstract void onUnbindView();
-    protected abstract P createPresenter();
 
     @Nullable
     @Override
@@ -55,13 +46,6 @@ public abstract class KFragment<V extends IView, P extends IPresenter<V>>
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if(presenter == null)
-            presenter = createPresenter();
-
-        if(!(this instanceof IView))
-            throw new ClassCastException("The fragment must implement IView. This is required by the presenter.");
-
-        presenter.attachView((V) this);
     }
 
     // -------------------------------------------------------
@@ -70,9 +54,6 @@ public abstract class KFragment<V extends IView, P extends IPresenter<V>>
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-        if(presenter != null)
-            presenter.detachView();
 
         onUnbindView();
     }
