@@ -24,7 +24,7 @@ import android.view.ViewGroup;
  * @param <T> data type to use
  * @param <VH> view holder, must be inherited from {@link KViewHolder}
  *
- * @author Adan Gutierrez Ortiz - 5/10/2017
+ * @author Adan Gutierrez Ortiz - 10/05/2017
  * @version 2.0.0
  * @since 2.0.0
  */

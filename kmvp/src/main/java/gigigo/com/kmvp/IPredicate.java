@@ -20,7 +20,7 @@ package gigigo.com.kmvp;
  *
  * @param <T> data type to use
  *
- * @author Juan Godínez Vera - 4/26/2017
+ * @author Juan Godínez Vera - 26/04/2017
  * @version 2.0.0
  * @since 2.0.0
  */

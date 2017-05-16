@@ -22,8 +22,8 @@ import android.support.annotation.UiThread;
  *
  * @param <V> the kmvp view
  *
- * @author Juan Godínez Vera - 12/22/2016
- * @author Daniel Moises Ruiz Pérez - 12/22/2016
+ * @author Juan Godínez Vera - 22/12/2016
+ * @author Daniel Moises Ruiz Pérez - 22/12/2016
  * @version 2.0.0
  * @since 1.0.0
  */

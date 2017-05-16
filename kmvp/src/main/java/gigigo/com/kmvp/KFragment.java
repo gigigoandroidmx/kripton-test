@@ -12,7 +12,14 @@ import android.view.ViewGroup;
 import java.lang.reflect.ParameterizedType;
 
 /**
- * @author Juan Godínez Vera - 4/28/2017.
+ * Defines the Fragment with base functionality, must be inherited from {@link Fragment}
+ *
+ * @param <V> view interface, must be inherited from {@link IView}
+ * @param <P> presenter interface, must be inherited from {@link IPresenter}
+ *
+ * @author Juan Godínez Vera - 28/04/2017
+ * @version 2.0.0
+ * @since 1.0.0
  */
 public abstract class KFragment<V extends IView, P extends IPresenter<V>>
         extends Fragment {
@@ -51,9 +58,10 @@ public abstract class KFragment<V extends IView, P extends IPresenter<V>>
         if(presenter == null)
             presenter = createPresenter();
 
-        presenter.attachView((V) this);
+        if(!(this instanceof IView))
+            throw new ClassCastException("The fragment must implement IView. This is required by the presenter.");
 
-        //throw new ClassCastException("The fragment must implement IView. This is required by the presenter.");
+        presenter.attachView((V) this);
     }
 
     // -------------------------------------------------------

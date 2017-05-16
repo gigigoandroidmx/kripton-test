@@ -30,8 +30,8 @@ import java.util.List;
  *
  * @param <T> data type to use
  *
- * @author Juan Godínez Vera - 12/22/2016
- * @author Adan Gutierrez Ortiz - 9/5/2017
+ * @author Juan Godínez Vera - 22/12/2016
+ * @author Adan Gutierrez Ortiz - 09/05/2017
  * @version 2.0.0
  * @since 1.0.0
  */
