@@ -34,13 +34,6 @@ public interface IInteractor {
     void setParams(List<Object> parameters);
 
     /**
-     * Defines the method to be called when the presenter invokes the data source
-     * @param <T> the type of data to gets
-     * @return the actual data type
-     */
-    <T> T execute()/* throws Throwable*/;
-
-    /**
      * Defines the method to be invoked when needs refresh the data source
      */
     void refreshData();

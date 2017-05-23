@@ -1,12 +1,12 @@
 package gigigo.com.kripton;
 
-import gigigo.com.kmvp.Interactor;
+import gigigo.com.kmvp.KInteractor;
 
 /**
  * @author Juan Godínez Vera - 5/2/2017.
  */
 public class HomeInteractor
-        extends Interactor {
+        extends KInteractor {
 
     private String data;
 

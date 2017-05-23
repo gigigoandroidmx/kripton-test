@@ -18,6 +18,7 @@ package gigigo.com.kmvp;
 import android.support.annotation.UiThread;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 /**
  * Defines the presenter with base functionality
@@ -35,6 +36,7 @@ public abstract class KPresenter<V extends IView>
 
     private WeakReference<V> viewReference;
     private boolean forceUpdate;
+    private List<Object> parameters;
 
     /**
      * Defines the method to be called to attaches the view
@@ -92,5 +94,22 @@ public abstract class KPresenter<V extends IView>
      */
     public boolean isForceUpdate() {
         return forceUpdate;
+    }
+
+    /**
+     * Defines the method to sets the parameters to be invoked when the api so requires
+     *
+     * @param parameters list of parameters
+     */
+    public void setParams(List<Object> parameters) {
+        this.parameters = parameters;
+    }
+
+    /**
+     * Gets the the parameters to be invoked by the api
+     * @return the parameters
+     */
+    public List<Object> getParams() {
+        return this.parameters;
     }
 }

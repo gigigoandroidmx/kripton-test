@@ -61,6 +61,8 @@ public abstract class KViewHolder<T>
      * @param item the data to bind
      */
     public void onBindViewHolder(@NonNull T item) {
+        if(item == null) throw new NullPointerException("Item is required");
+        
         this.item = item;
     }
 
