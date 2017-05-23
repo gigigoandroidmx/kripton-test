@@ -62,7 +62,7 @@ public abstract class KViewHolder<T>
      */
     public void onBindViewHolder(@NonNull T item) {
         if(item == null) throw new NullPointerException("Item is required");
-        
+
         this.item = item;
     }
 

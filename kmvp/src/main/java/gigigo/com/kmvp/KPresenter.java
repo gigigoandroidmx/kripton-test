@@ -18,6 +18,7 @@ package gigigo.com.kmvp;
 import android.support.annotation.UiThread;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -102,7 +103,26 @@ public abstract class KPresenter<V extends IView>
      * @param parameters list of parameters
      */
     public void setParams(List<Object> parameters) {
+        if(parameters == null) return;
+
         this.parameters = parameters;
+    }
+
+    /**
+     * Defines the method to sets the parameters to be invoked when the api so requires
+     *
+     * @param parameters array of parameters
+     */
+    public void setParams(Object ... parameters) {
+        if(parameters == null) return;
+
+        ArrayList<Object> arrayList = new ArrayList(parameters.length);
+
+        for(Object item : parameters) {
+            arrayList.add(item);
+        }
+
+        setParams(arrayList);
     }
 
     /**
