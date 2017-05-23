@@ -30,8 +30,8 @@ import java.util.List;
  *
  * @param <T> data type to use
  *
- * @author Juan Godínez Vera - 12/22/2016
- * @author Adan Gutierrez Ortiz - 9/5/2017
+ * @author Juan Godínez Vera - 22/12/2016
+ * @author Adan Gutierrez Ortiz - 09/05/2017
  * @version 2.0.0
  * @since 1.0.0
  */
@@ -39,7 +39,7 @@ public abstract class KAdapter<T>
         extends RecyclerView.Adapter<KViewHolder<T>>
         implements IEnumerable<T> {
 
-    private ArrayList<T> itemsSource = new ArrayList<T>();
+    private ArrayList<T> itemsSource = new ArrayList<>();
 
     /**
      * Called by RecyclerView to display the data at the specified position

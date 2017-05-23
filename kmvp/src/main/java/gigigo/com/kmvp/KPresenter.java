@@ -23,8 +23,8 @@ import java.lang.ref.WeakReference;
  * Defines the presenter with base functionality
  * @param <V> the kmvp view
  *
- * @author Juan Godínez Vera - 2/21/2017.
- * @author Daniel Moises Ruiz Pérez - 2/21/2017.
+ * @author Juan Godínez Vera - 21/02/2017
+ * @author Daniel Moises Ruiz Pérez - 21/02/2017
  * @version 2.0.0
  * @since 1.0.0
  */

@@ -20,8 +20,8 @@ import java.util.List;
 /**
  * Defines the interactor with base functionality
  *
- * @author Juan Godínez Vera - 12/28/2016
- * @author Daniel Moises Ruiz Pérez - 12/28/2016
+ * @author Juan Godínez Vera - 28/12/2016
+ * @author Daniel Moises Ruiz Pérez - 28/12/2016
  * @version 2.0.0
  * @since 1.0.0
  */

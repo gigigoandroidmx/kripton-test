@@ -18,8 +18,8 @@ package gigigo.com.kmvp;
 /**
  * Defines the base interface for every kmvp view
  *
- * @author Juan Godínez Vera - 3/2/2017
- * @author Daniel Moises Ruiz Pérez - 3/2/2017
+ * @author Juan Godínez Vera - 02/03/2017
+ * @author Daniel Moises Ruiz Pérez - 02/03/2017
  * @version 2.0.0
  * @since 1.0.0
  */
