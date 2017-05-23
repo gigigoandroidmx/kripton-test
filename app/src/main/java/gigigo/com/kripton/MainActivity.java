@@ -8,9 +8,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import gigigo.com.kmvp.KActivity;
-import gigigo.com.kmvp.NavigationManager;
+import gigigo.com.kmvp.KNavigationManager;
 
-public class MainActivity extends KActivity {
+public class MainActivity
+        extends KActivity {
 
     private DrawerLayout drawer;
     private Toolbar mToolbar;
@@ -25,8 +26,8 @@ public class MainActivity extends KActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         initDrawerToggle(drawer, navigationView);
 
-        //Initialize NavigationManager and id container
-        setNavigationManager(new NavigationManager(getSupportFragmentManager()));
+        //Initialize KNavigationManager and id container
+        setNavigationManager(new KNavigationManager(getSupportFragmentManager()));
 
         //Select First menu position
         navigationView.getMenu().getItem(0).setChecked(true);
@@ -83,6 +84,9 @@ public class MainActivity extends KActivity {
     protected int getLayoutResourceId() {
         return R.layout.activity_main_test;
     }
+
+    @Override
+    protected void onInitilize() { }
 
     @Override
     protected void onBindView() {

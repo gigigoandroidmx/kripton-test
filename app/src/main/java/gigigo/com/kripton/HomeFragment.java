@@ -33,6 +33,9 @@ public class HomeFragment
     }
 
     @Override
+    protected void onInitialize() { }
+
+    @Override
     protected void onBindView(View root) {
         textViewMessage = (TextView) root.findViewById(R.id.textview_message);
         recyclerView = (RecyclerView) root.findViewById(R.id.recyclerview);

@@ -10,22 +10,22 @@ import android.support.v4.app.FragmentTransaction;
  * Created by ajea on 16/05/17.
  */
 
-public class NavigationManager {
+public class KNavigationManager {
 
-    private static FragmentManager mFragmentManager;
+    private static FragmentManager fragmentManager;
 
-    public NavigationManager(@NonNull FragmentManager fragmentManager) {
-        mFragmentManager = fragmentManager;
+    public KNavigationManager(@NonNull FragmentManager fragmentManager) {
+        KNavigationManager.fragmentManager = fragmentManager;
     }
 
     public void replaceFragment(Fragment fragment, int idContainer) {
-        mFragmentManager.beginTransaction().replace(idContainer,fragment).commit();
+        fragmentManager.beginTransaction().replace(idContainer,fragment).commit();
     }
 
     public void addFragmentToBackStack(@NonNull Fragment fragment, int idContainer) {
-        if(fragment != null && idContainer > 0){
+        if(fragment != null && idContainer > 0) {
             if (!exitsFragment(fragment.getClass().getName())) {
-                FragmentTransaction ft = mFragmentManager.beginTransaction();
+                FragmentTransaction ft = fragmentManager.beginTransaction();
                 ft.replace(idContainer, fragment);
                 ft.addToBackStack(fragment.getClass().getName());
                 ft.commit();
@@ -34,23 +34,23 @@ public class NavigationManager {
     }
 
     public void removeFragment(Fragment fragment) {
-        if(fragment != null){
-            mFragmentManager.beginTransaction().remove(fragment);
-            mFragmentManager.beginTransaction().commit();
-            mFragmentManager.popBackStack();
+        if(fragment != null) {
+            fragmentManager.beginTransaction().remove(fragment);
+            fragmentManager.beginTransaction().commit();
+            fragmentManager.popBackStack();
         }
     }
 
     public void navigateBack(Activity baseActivity) {
-        if (mFragmentManager.getBackStackEntryCount() == 0) {
+        if (fragmentManager.getBackStackEntryCount() == 0) {
             baseActivity.finish();
         } else {
-            mFragmentManager.popBackStackImmediate();
+            fragmentManager.popBackStackImmediate();
         }
     }
 
     public void openAsRoot(Fragment fragment, int idContainer) {
-        if(fragment != null && idContainer > 0){
+        if(fragment != null && idContainer > 0) {
             popAllFragment();
             replaceFragment(fragment, idContainer);
         }
@@ -58,33 +58,30 @@ public class NavigationManager {
 
     private void popAllFragment() {
         // Clear all back stack.
-        int backStackCount = mFragmentManager.getBackStackEntryCount();
+        int backStackCount = fragmentManager.getBackStackEntryCount();
         for (int i = 0; i < backStackCount; i++) {
             // Get the back stack fragment id.
-            int backStackId = mFragmentManager.getBackStackEntryAt(i).getId();
-            mFragmentManager.popBackStack(backStackId, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            int backStackId = fragmentManager.getBackStackEntryAt(i).getId();
+            fragmentManager.popBackStack(backStackId, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         } /* end of for */
     }
 
     public void popFragments(String fragmentName){
-        int backStackCount = mFragmentManager.getBackStackEntryCount();
-        if(backStackCount > 0){
+        int backStackCount = fragmentManager.getBackStackEntryCount();
+        if(backStackCount > 0) {
             for (int i = 1; i < backStackCount; i++) {
-                mFragmentManager.popBackStackImmediate(fragmentName, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                fragmentManager.popBackStackImmediate(fragmentName, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         }
     }
 
     public boolean exitsFragment(String name) {
-        boolean exist = false;
-
-        for (Fragment fragment : mFragmentManager.getFragments()){
+        for (Fragment fragment : fragmentManager.getFragments()) {
             if (fragment != null && fragment.isAdded() && fragment.getClass().getName().equals(name)) {
-                exist = true;
-                break;
+                return true;
             }
         }
 
-        return exist;
+        return false;
     }
 }

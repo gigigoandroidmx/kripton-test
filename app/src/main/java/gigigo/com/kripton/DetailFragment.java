@@ -2,14 +2,10 @@ package gigigo.com.kripton;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import gigigo.com.kmvp.IPresenter;
-import gigigo.com.kmvp.IView;
-import gigigo.com.kmvp.KFragment;
 import gigigo.com.kmvp.KSimpleFragment;
 
 /**

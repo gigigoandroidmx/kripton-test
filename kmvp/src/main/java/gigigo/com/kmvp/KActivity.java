@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -13,7 +12,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -22,6 +20,7 @@ import android.view.inputmethod.InputMethodManager;
  * Defines the Activity with base functionality, must be inherited from {@link AppCompatActivity}
  *
  * @author Juan Godínez Vera - 15/05/2017
+ * @author Alan Espinosa - 16/05/2017
  * @version 2.0.0
  * @since 2.0.0
  */
@@ -30,15 +29,16 @@ public abstract class KActivity
         implements NavigationView.OnNavigationItemSelectedListener, FragmentManager.OnBackStackChangedListener{
 
     private DrawerLayout drawer;
-    private Toolbar mToolbar;
+    private Toolbar toolbar;
     private ActionBarDrawerToggle toggle;
-    private NavigationManager mNavigationManager;
+    private KNavigationManager navigationManager;
     private int idFragmentContainer = 0;
     private InputMethodManager inputMethodManager;
-    private NavigationView mNavigationView;
+    private NavigationView navigationView;
 
     @LayoutRes
     protected abstract int getLayoutResourceId();
+    protected abstract void onInitilize();
     protected abstract void onBindView();
     protected abstract void onUnbindView();
 
@@ -55,18 +55,20 @@ public abstract class KActivity
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResourceId());
         setIdFragmentContainer(getFragmentContainerId());
+        onInitilize();
         onBindView();
 
         inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         getSupportFragmentManager().addOnBackStackChangedListener(this);
     }
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         onUnbindView();
     }
+
+    //endregion
 
     //Onbackpressed method from back listener
     @Override
@@ -77,7 +79,6 @@ public abstract class KActivity
             super.onBackPressed();
         }
     }
-
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -102,20 +103,20 @@ public abstract class KActivity
     }
 
     public void hidekeyboard() {
-        if (mToolbar != null)
-            inputMethodManager.hideSoftInputFromWindow(mToolbar.getWindowToken(), 0);
+        if (toolbar != null)
+            inputMethodManager.hideSoftInputFromWindow(toolbar.getWindowToken(), 0);
     }
 
     public void initDrawerToggle (DrawerLayout drawerLayout, NavigationView navigationView){
-        this.mNavigationView = navigationView;
-        mNavigationView.setNavigationItemSelectedListener(this);
+        this.navigationView = navigationView;
+        this.navigationView.setNavigationItemSelectedListener(this);
 
         drawer = drawerLayout;
-        toggle = new ActionBarDrawerToggle(this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(getSupportFragmentManager().getBackStackEntryCount() > 0){
@@ -131,12 +132,12 @@ public abstract class KActivity
      * Getter and Setter Methods
      * **/
 
-    public NavigationManager getNavigationManager() {
-        return mNavigationManager;
+    public KNavigationManager getNavigationManager() {
+        return navigationManager;
     }
 
-    public void setNavigationManager(NavigationManager mNavigationManager) {
-        this.mNavigationManager = mNavigationManager;
+    public void setNavigationManager(KNavigationManager navigationManager) {
+        this.navigationManager = navigationManager;
     }
 
     public int getIdFragmentContainer() {
@@ -144,12 +145,12 @@ public abstract class KActivity
     }
 
     public void setToolbar(Toolbar toolbar){
-        this.mToolbar = toolbar;
-        setSupportActionBar(mToolbar);
+        this.toolbar = toolbar;
+        setSupportActionBar(this.toolbar);
     }
 
     public Toolbar getToolbar(){
-        return mToolbar;
+        return toolbar;
     }
 
     public void setIdFragmentContainer(@IdRes int idFragmentContainer) {
@@ -173,9 +174,7 @@ public abstract class KActivity
     }
 
     public void setNavigationView(NavigationView navigationView){
-        this.mNavigationView = navigationView;
-        mNavigationView.setNavigationItemSelectedListener(this);
+        this.navigationView = navigationView;
+        this.navigationView.setNavigationItemSelectedListener(this);
     }
-
-    //endregion
 }

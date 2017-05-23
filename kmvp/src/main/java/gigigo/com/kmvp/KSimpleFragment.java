@@ -1,6 +1,20 @@
+/* Copyright (c) 2016 Gigigo Android Development Team México
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package gigigo.com.kmvp;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -35,20 +49,6 @@ public abstract class KSimpleFragment
     //region Handling Lifecycle Fragment
 
     // -------------------------------------------------------
-    // ----------------------- Created -----------------------
-    // -------------------------------------------------------
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-    }
-
-    // -------------------------------------------------------
     // ---------------------- Destroyed ----------------------
     // -------------------------------------------------------
     @Override
@@ -58,18 +58,25 @@ public abstract class KSimpleFragment
         onUnbindView();
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
+    //endregion
+
+    public KActivity getBaseActivity() {
+        if(getActivity() instanceof KActivity) {
+            return (KActivity)getActivity();
+        }
+
+        return null;
     }
 
-
-    public NavigationManager getNavigationManager(){
-        return ((KActivity)getActivity()).getNavigationManager();
+    public KNavigationManager getNavigationManager(){
+        return getBaseActivity() != null
+                ? (getBaseActivity()).getNavigationManager()
+                : null;
     }
 
     public int getFragmentIdContainer(){
-        return ((KActivity)getActivity()).getIdFragmentContainer();
+        return getBaseActivity() != null
+                ? (getBaseActivity()).getIdFragmentContainer()
+                : null;
     }
-    //endregion
 }

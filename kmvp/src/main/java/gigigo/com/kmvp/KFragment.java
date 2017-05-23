@@ -15,7 +15,6 @@
 
 package gigigo.com.kmvp;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -41,7 +40,7 @@ public abstract class KFragment<V extends IView, P extends IPresenter<V>>
 
     @LayoutRes
     protected abstract int getLayoutResourceId();
-    protected abstract void onInitilize();
+    protected abstract void onInitialize();
     protected abstract void onBindView(View root);
     protected abstract void onUnbindView();
     protected abstract P createPresenter();
@@ -51,7 +50,7 @@ public abstract class KFragment<V extends IView, P extends IPresenter<V>>
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(getLayoutResourceId(), container, false);
-        onInitilize();
+        onInitialize();
         onBindView(root);
         return root;
     }
@@ -61,11 +60,6 @@ public abstract class KFragment<V extends IView, P extends IPresenter<V>>
     // -------------------------------------------------------
     // ----------------------- Created -----------------------
     // -------------------------------------------------------
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -92,18 +86,25 @@ public abstract class KFragment<V extends IView, P extends IPresenter<V>>
         onUnbindView();
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
+    //endregion
+
+    public KActivity getBaseActivity() {
+        if(getActivity() instanceof KActivity) {
+            return (KActivity)getActivity();
+        }
+
+        return null;
     }
 
-
-    public NavigationManager getNavigationManager(){
-        return ((KActivity)getActivity()).getNavigationManager();
+    public KNavigationManager getNavigationManager(){
+        return getBaseActivity() != null
+                ? (getBaseActivity()).getNavigationManager()
+                : null;
     }
 
     public int getFragmentIdContainer(){
-        return ((KActivity)getActivity()).getIdFragmentContainer();
+        return getBaseActivity() != null
+                ? (getBaseActivity()).getIdFragmentContainer()
+                : null;
     }
-    //endregion
 }
