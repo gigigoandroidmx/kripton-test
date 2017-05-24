@@ -10,27 +10,12 @@ public class HomeInteractor
 
     private String data;
 
-    /**
-     * Defines the method to be called when the presenter invokes the data source
-     *
-     * @return the actual data type
-     */
-    @Override
-    public <T> T execute() {
-        if(data == null) {
-            data = "Hello Kripton 2.0!!!";
-        }
-        return (T) data;
-    }
-
     @Override
     public void refreshData() {
         data = null;
     }
 
-    public String getMessage(String name) {
-        String n = tryGetParamValueAs(String.class, 0);
-
+    public String getMessage() {
         return "Hello Kripton 2.0!!!";
     }
 }

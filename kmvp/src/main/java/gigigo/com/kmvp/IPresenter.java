@@ -34,13 +34,13 @@ public interface IPresenter<V extends IView> {
      *
      * @param view kmvp view
      */
-    @UiThread
+    //@UiThread
     void attachView(V view);
 
     /**
      * Defines the method to be called when the view has been released
      */
-    @UiThread
+    //@UiThread
     void detachView();
 
     /**
