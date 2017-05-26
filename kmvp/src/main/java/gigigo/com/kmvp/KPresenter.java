@@ -44,7 +44,7 @@ public abstract class KPresenter<V extends IView>
      *
      * @param view kmvp view
      */
-    //@UiThread
+    @UiThread
     public void attachView(V view) {
         viewReference = new WeakReference<V>(view);
     }
@@ -52,7 +52,7 @@ public abstract class KPresenter<V extends IView>
     /**
      * Defines the method to be called when the view has been released
      */
-    //@UiThread
+    @UiThread
     public void detachView() {
         if (viewReference != null) {
             viewReference.clear();
@@ -75,7 +75,7 @@ public abstract class KPresenter<V extends IView>
      * Determines if the view is attached
      * @return <code>true</code>, whether view is attached, otherwise <code>false</code>
      */
-    //@UiThread
+    @UiThread
     public boolean isViewAttached() {
         return viewReference != null && viewReference.get() != null;
     }
@@ -84,7 +84,7 @@ public abstract class KPresenter<V extends IView>
      * Gets the attached view
      * @return <code>null</code>, whether view is not attached, otherwise the concrete view instance
      */
-    //@UiThread
+    @UiThread
     public V getView() {
         return viewReference == null ? null : viewReference.get();
     }
