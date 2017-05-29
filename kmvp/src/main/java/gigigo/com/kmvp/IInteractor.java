@@ -37,4 +37,16 @@ public interface IInteractor {
      * Defines the method to be invoked when needs refresh the data source
      */
     void refreshData();
+
+    /**
+     * Defines the method to be invoked when the
+     * @param callback
+     */
+    void execute(ICallback callback);
+
+    /**
+     * Defines the method to be invoked when
+     */
+    void run();
+
 }

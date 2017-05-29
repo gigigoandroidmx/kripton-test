@@ -1,5 +1,6 @@
 package gigigo.com.kripton;
 
+import gigigo.com.kmvp.ICallback;
 import gigigo.com.kmvp.KPresenter;
 
 
@@ -23,6 +24,9 @@ public class HomePresenter
 
         if(isForceUpdate()) {
             interactor.refreshData();
+            interactor.execute(new ICallback() {
+
+            });
         }
 
         getView().showMessage(interactor.getMessage());

@@ -1,5 +1,6 @@
 package gigigo.com.kripton;
 
+import gigigo.com.kmvp.Executor;
 import gigigo.com.kmvp.KInteractor;
 
 /**
@@ -9,10 +10,20 @@ public class HomeInteractor
         extends KInteractor {
 
     private String data;
+    private Executor executor;
+
+    public HomeInteractor(Executor executor) {
+        super(executor);
+    }
 
     @Override
     public void refreshData() {
         data = null;
+    }
+
+    @Override
+    public void run() {
+
     }
 
     public String getMessage() {

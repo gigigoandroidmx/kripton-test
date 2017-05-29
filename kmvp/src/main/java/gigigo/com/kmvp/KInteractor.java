@@ -28,7 +28,15 @@ import java.util.List;
 public abstract class KInteractor
         implements IInteractor {
 
+    protected ICallback callback;
+
     private List<Object> parameters;
+
+    private final Executor executor;
+
+    protected KInteractor(Executor executor) {
+        this.executor = executor;
+    }
 
     public boolean hasParams() {
         return parameters != null && parameters.size() > 0;
@@ -71,5 +79,15 @@ public abstract class KInteractor
     @Override
     public void setParams(List<Object> parameters) {
         this.parameters = parameters;
+    }
+
+    @Override
+    public void execute(ICallback callback) {
+        if (null == callback) {
+            throw new IllegalArgumentException("Callback can't be null");
+        }
+
+        this.callback = callback;
+        this.executor.run(this);
     }
 }
