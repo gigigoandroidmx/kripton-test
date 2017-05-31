@@ -15,6 +15,7 @@
 
 package gigigo.com.kmvp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -37,6 +38,7 @@ public abstract class KFragment<V extends IView, P extends IPresenter<V>>
         extends Fragment {
 
     protected P presenter;
+    protected Context context;
 
     @LayoutRes
     protected abstract int getLayoutResourceId();
@@ -44,6 +46,12 @@ public abstract class KFragment<V extends IView, P extends IPresenter<V>>
     protected abstract void onBindView(View root);
     protected abstract void onUnbindView();
     protected abstract P createPresenter();
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
 
     @Nullable
     @Override
@@ -91,11 +99,17 @@ public abstract class KFragment<V extends IView, P extends IPresenter<V>>
         onUnbindView();
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        this.context = null;
+    }
+
     //endregion
 
     public KActivity getBaseActivity() {
-        if(getActivity() instanceof KActivity) {
-            return (KActivity)getActivity();
+        if(this.context instanceof KActivity) {
+            return (KActivity)this.context;
         }
 
         return null;
@@ -111,5 +125,9 @@ public abstract class KFragment<V extends IView, P extends IPresenter<V>>
         return getBaseActivity() != null
                 ? (getBaseActivity()).getIdFragmentContainer()
                 : null;
+    }
+
+    public Context getFragmentContext() {
+        return this.context;
     }
 }
