@@ -15,27 +15,13 @@
 
 package gigigo.com.kmvp;
 
-import java.util.List;
-
 /**
- * Defines the base interface for every kmvp interactor
+ * Defines an interface for the {@link IInteractor} execution out of the UI thread
  *
- * @author Juan Godínez Vera - 22/12/2016
- * @author Daniel Moises Ruiz Pérez - 22/12/2016
+ * @author Juan Godínez Vera - 5/29/2016
  * @version 2.0.0
- * @since 1.0.0
+ * @since 2.0.0
  */
-public interface IInteractor {
-
-    /**
-     * Defines the method to sets the parameters to be invoked when the api so requires
-     * @param parameters list of parameters
-     */
-    void setParams(List<Object> parameters);
-
-    /**
-     * Defines the method to be invoked when the use case is executed
-     */
-    void run();
-
+public interface IExecutor {
+    void run(final IInteractor interactor);
 }

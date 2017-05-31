@@ -42,12 +42,4 @@ public interface IPresenter<V extends IView> {
      */
     @UiThread
     void detachView();
-
-    /**
-     * Defines the method to be invoked when needs refresh the data source.
-     * Default value is <code>false</code>
-     * @param force <code>true</code>, whether needs refresh, otherwise <code>false</code>
-     */
-    void forceUpdate(boolean force);
-
 }

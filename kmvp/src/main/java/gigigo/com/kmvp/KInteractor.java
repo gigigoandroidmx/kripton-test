@@ -28,14 +28,12 @@ import java.util.List;
 public abstract class KInteractor
         implements IInteractor {
 
-    protected ICallback callback;
+    private final KMainThread mainThread;
 
     private List<Object> parameters;
 
-    private final Executor executor;
-
-    protected KInteractor(Executor executor) {
-        this.executor = executor;
+    protected KInteractor() {
+        mainThread = new KMainThread();
     }
 
     public boolean hasParams() {
@@ -43,7 +41,7 @@ public abstract class KInteractor
     }
 
     public <T> T tryGetParamValueAs(Class<T> classType, int index) {
-        return tryGetParamValueAs(classType, index, null);
+        return tryGetParamValueAs(classType, index, DefaultValues.defaultValue(classType));
     }
 
     public <T> T tryGetParamValueAs(Class<T> classType, int index, T defaultValue) {
@@ -51,21 +49,13 @@ public abstract class KInteractor
             try {
                 if(index < parameters.size()) {
                     Object object = parameters.get(index);
-                    return as(classType, object, defaultValue);
+                    return DefaultValues.as(classType, object, defaultValue);
                 } else {
                     return defaultValue;
                 }
             } catch (Exception exception) {
                 return defaultValue;
             }
-        }
-
-        return null;
-    }
-
-    private <T> T as(Class<T> classType, Object object, T defaultValue) {
-        if(object != null && classType.isInstance(object)) {
-            return classType.cast(object);
         }
 
         return defaultValue;
@@ -81,13 +71,14 @@ public abstract class KInteractor
         this.parameters = parameters;
     }
 
-    @Override
-    public void execute(ICallback callback) {
-        if (null == callback) {
-            throw new IllegalArgumentException("Callback can't be null");
-        }
-
-        this.callback = callback;
-        this.executor.run(this);
+    /**
+     *
+     * @param function
+     */
+    public void post(IFunction function) {
+        mainThread.post(function);
     }
+
+
+
 }
