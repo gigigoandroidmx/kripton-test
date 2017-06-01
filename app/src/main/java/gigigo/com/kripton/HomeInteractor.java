@@ -12,14 +12,6 @@ public class HomeInteractor
     private String data;
     private Executor executor;
 
-    public HomeInteractor(Executor executor) {
-        super(executor);
-    }
-
-    @Override
-    public void refreshData() {
-        data = null;
-    }
 
     @Override
     public void run() {

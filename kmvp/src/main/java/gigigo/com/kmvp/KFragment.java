@@ -39,6 +39,7 @@ public abstract class KFragment<V extends IView, P extends IPresenter<V>>
 
     protected P presenter;
     protected Context context;
+    protected KNavigationFragmentListener mNavigationFragmentListener;
 
     @LayoutRes
     protected abstract int getLayoutResourceId();
@@ -76,6 +77,9 @@ public abstract class KFragment<V extends IView, P extends IPresenter<V>>
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        if (getBaseActivity() != null){
+            mNavigationFragmentListener = getBaseActivity().getNavigationFragmentListener();
+        }
 
         if(presenter == null)
             presenter = createPresenter();

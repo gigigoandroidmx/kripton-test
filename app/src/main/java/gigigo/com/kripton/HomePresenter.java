@@ -22,12 +22,6 @@ public class HomePresenter
 
         getView().showProgressIndicator(true);
 
-        if(isForceUpdate()) {
-            interactor.refreshData();
-            interactor.execute(new ICallback() {
-
-            });
-        }
 
         getView().showMessage(interactor.getMessage());
 

@@ -13,7 +13,7 @@ import gigigo.com.kmvp.KNavigationManager;
 public class MainActivity
         extends KActivity {
 
-    private DrawerLayout drawer;
+    private DrawerLayout mDrawer;
     private Toolbar mToolbar;
 
     @Override
@@ -22,9 +22,9 @@ public class MainActivity
         setContentView(getLayoutResourceId());
         initToolbar();
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        initDrawerToggle(drawer, navigationView);
+        initDrawerToggle(mDrawer, navigationView);
 
         //Initialize KNavigationManager and id container
         setNavigationManager(new KNavigationManager(getSupportFragmentManager()));

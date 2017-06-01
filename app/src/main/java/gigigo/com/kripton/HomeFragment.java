@@ -23,7 +23,6 @@ public class HomeFragment
     @Override
     public void onResume() {
         super.onResume();
-        presenter.forceUpdate(true);
         presenter.getMessage();
     }
 

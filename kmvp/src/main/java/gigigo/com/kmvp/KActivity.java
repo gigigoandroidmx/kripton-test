@@ -6,6 +6,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -31,10 +32,10 @@ public abstract class KActivity
     private DrawerLayout drawer;
     private Toolbar toolbar;
     private ActionBarDrawerToggle toggle;
-    private KNavigationManager navigationManager;
+    private KNavigationManager mNavigationManager;
     private int idFragmentContainer = 0;
     private InputMethodManager inputMethodManager;
-    private NavigationView navigationView;
+    private NavigationView mNavigationView;
 
     @LayoutRes
     protected abstract int getLayoutResourceId();
@@ -108,8 +109,8 @@ public abstract class KActivity
     }
 
     public void initDrawerToggle (DrawerLayout drawerLayout, NavigationView navigationView){
-        this.navigationView = navigationView;
-        this.navigationView.setNavigationItemSelectedListener(this);
+        mNavigationView = navigationView;
+        mNavigationView.setNavigationItemSelectedListener(this);
 
         drawer = drawerLayout;
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -129,15 +130,31 @@ public abstract class KActivity
     }
 
     /**
+     * Navigation listener methods
+     * **/
+
+    private KNavigationFragmentListener navigationFragmentListener = new KNavigationFragmentListener() {
+        @Override
+        public void addFragmentBackstack(Fragment fragment) {
+            mNavigationManager.addFragmentToBackStack(fragment, idFragmentContainer);
+        }
+
+        @Override
+        public void replaceFragment(Fragment fragment) {
+            mNavigationManager.replaceFragment(fragment, idFragmentContainer);
+        }
+    };
+
+    /**
      * Getter and Setter Methods
      * **/
 
     public KNavigationManager getNavigationManager() {
-        return navigationManager;
+        return mNavigationManager;
     }
 
     public void setNavigationManager(KNavigationManager navigationManager) {
-        this.navigationManager = navigationManager;
+        this.mNavigationManager = navigationManager;
     }
 
     public int getIdFragmentContainer() {
@@ -174,7 +191,11 @@ public abstract class KActivity
     }
 
     public void setNavigationView(NavigationView navigationView){
-        this.navigationView = navigationView;
-        this.navigationView.setNavigationItemSelectedListener(this);
+        this.mNavigationView = navigationView;
+        mNavigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public KNavigationFragmentListener getNavigationFragmentListener() {
+        return navigationFragmentListener;
     }
 }

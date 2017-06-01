@@ -34,6 +34,7 @@ public abstract class KSimpleFragment
         extends Fragment {
 
     protected Context context;
+    protected KNavigationFragmentListener mNavigationFragmentListener;
 
     @LayoutRes
     protected abstract int getLayoutResourceId();
@@ -53,6 +54,15 @@ public abstract class KSimpleFragment
         View root = inflater.inflate(getLayoutResourceId(), container, false);
         onBindView(root);
         return root;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        if (getBaseActivity() != null){
+            mNavigationFragmentListener = getBaseActivity().getNavigationFragmentListener();
+        }
     }
 
     //region Handling Lifecycle Fragment
