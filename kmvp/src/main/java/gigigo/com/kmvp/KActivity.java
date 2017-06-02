@@ -1,6 +1,7 @@
 package gigigo.com.kmvp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
@@ -74,7 +75,7 @@ public abstract class KActivity
     //Onbackpressed method from back listener
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        if (drawer != null && drawer.isDrawerOpen(GravityCompat.START)) {
             closeDrawer();
         } else {
             super.onBackPressed();
@@ -89,11 +90,13 @@ public abstract class KActivity
 
     @Override
     public void onBackStackChanged() {
-        if(getSupportFragmentManager().getBackStackEntryCount() > 0){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }else {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            toggle.syncState();
+        if (getSupportActionBar() != null){
+            if(getSupportFragmentManager().getBackStackEntryCount() > 0){
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }else {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                toggle.syncState();
+            }
         }
     }
 
@@ -142,6 +145,12 @@ public abstract class KActivity
         @Override
         public void replaceFragment(Fragment fragment) {
             mNavigationManager.replaceFragment(fragment, idFragmentContainer);
+        }
+
+        @Override
+        public void showActivity(Class type) {
+            Intent mActivityIntent = new Intent(KActivity.this, type);
+            startActivity(mActivityIntent);
         }
     };
 

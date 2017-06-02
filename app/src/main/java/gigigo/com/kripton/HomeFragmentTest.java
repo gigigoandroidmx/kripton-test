@@ -52,7 +52,8 @@ public class HomeFragmentTest extends KSimpleFragment implements View.OnClickLis
         switch (view.getId()){
             case R.id.bt_home_detail:
                 if (mNavigationFragmentListener != null){
-                    mNavigationFragmentListener.addFragmentBackstack(DetailFragment.newInstance());
+//                    mNavigationFragmentListener.addFragmentBackstack(DetailFragment.newInstance());
+                    mNavigationFragmentListener.showActivity(DetailActivity.class);
                 }
 //                getNavigationManager().addFragmentToBackStack(DetailFragment.newInstance(), getFragmentIdContainer());
                 break;
