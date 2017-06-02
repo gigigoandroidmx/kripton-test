@@ -15,20 +15,19 @@
 
 package gigigo.com.kmvp;
 
-import android.support.annotation.AnyThread;
-
 /**
  * Defines an interface for the execute action
+ *
+ * @param <T> data type
  *
  * @author Juan Godínez Vera - 26/04/2017
  * @version 2.0.0
  * @since 2.0.0
  */
-public interface IAction {
+public interface IAction<T> {
     /**
      * Defines the method to be called when the action is invoked.
      * @param argument data type to return
-     * @param <T> data type
      */
-    <T> void invoke(T argument);
+    void invoke(T argument);
 }

@@ -18,14 +18,14 @@ public class KMainThread {
         handler = new Handler(android.os.Looper.getMainLooper());
     }
 
-    public void post(final IFunction function) {
+    public void post(final Runnable runnable) {
         if(isOnUiThread()) {
-            function.apply();
+            runnable.run();
         } else {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    function.apply();
+                    runnable.run();
                 }
             });
         }

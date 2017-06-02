@@ -28,13 +28,7 @@ import java.util.List;
 public abstract class KInteractor
         implements IInteractor {
 
-    private final KMainThread mainThread;
-
     private List<Object> parameters;
-
-    protected KInteractor() {
-        mainThread = new KMainThread();
-    }
 
     public boolean hasParams() {
         return parameters != null && parameters.size() > 0;
@@ -70,15 +64,4 @@ public abstract class KInteractor
     public void setParams(List<Object> parameters) {
         this.parameters = parameters;
     }
-
-    /**
-     *
-     * @param function
-     */
-    public void post(IFunction function) {
-        mainThread.post(function);
-    }
-
-
-
 }

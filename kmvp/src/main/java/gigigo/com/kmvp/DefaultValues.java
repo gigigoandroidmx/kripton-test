@@ -71,7 +71,6 @@ public class DefaultValues {
         return reference;
     }
 
-
     public static <T> T as(Class<T> classType, Object object, T defaultValue) {
         if(object != null && classType.isInstance(object)) {
             return classType.cast(object);

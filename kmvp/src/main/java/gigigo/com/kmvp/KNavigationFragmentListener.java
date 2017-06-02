@@ -2,14 +2,15 @@ package gigigo.com.kmvp;
 
 import android.support.v4.app.Fragment;
 
-
-
 /**
- * Created by ajea on 17/05/17.
+ * Defines an listener interface for fragment actions
+ *
+ * @author Alan Espinosa - 17/05/17
+ * @version 2.0.0
+ * @since 2.0.0
  */
-
 public interface KNavigationFragmentListener {
-    public void addFragmentBackstack(Fragment fragment);
-    public void replaceFragment(Fragment fragment);
-    public void showActivity(Class type);
+    void addFragmentBackstack(Fragment fragment);
+    void replaceFragment(Fragment fragment);
+    void showActivity(Class type);
 }

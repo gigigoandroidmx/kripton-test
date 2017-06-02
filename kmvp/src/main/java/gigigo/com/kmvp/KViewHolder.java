@@ -45,7 +45,7 @@ public abstract class KViewHolder<T>
      * Sets the action command when the item view is invoked
      * @param actionCommand command to invoke
      */
-    public void setActionCommand(final IAction actionCommand) {
+    protected void setActionCommand(final IAction<T> actionCommand) {
         if(actionCommand != null) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
