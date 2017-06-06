@@ -60,6 +60,33 @@ public abstract class KPresenter<V extends IView>
     }
 
     /**
+     * Called after onCreate(Bundle) — or after onRestart() when the activity
+     * had been stopped
+     */
+    @Override
+    public void onStart() { }
+
+    /**
+     * Called after onRestoreInstanceState(Bundle), onRestart(), or onPause(),
+     * for your activity to start interacting with the user
+     */
+    @Override
+    public void onResume() { }
+
+    /**
+     * Called as part of the activity lifecycle when an activity is going into
+     * the background, but has not (yet) been killed
+     */
+    @Override
+    public void onPause() { }
+
+    /**
+     * Called when you are no longer visible to the user
+     */
+    @Override
+    public void onStop() { }
+
+    /**
      * Determines if the view is attached
      * @return <code>true</code>, whether view is attached, otherwise <code>false</code>
      */
@@ -112,4 +139,6 @@ public abstract class KPresenter<V extends IView>
     public List<Object> getParams() {
         return this.parameters;
     }
+
+
 }

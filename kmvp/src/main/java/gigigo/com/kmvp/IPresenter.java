@@ -42,4 +42,27 @@ public interface IPresenter<V extends IView> {
      */
     @UiThread
     void detachView();
+
+    /**
+     * Called after onCreate(Bundle) — or after onRestart() when the activity
+     * had been stopped
+     */
+    void onStart();
+
+    /**
+     * Called after onRestoreInstanceState(Bundle), onRestart(), or onPause(),
+     * for your activity to start interacting with the user
+     */
+    void onResume();
+
+    /**
+     * Called as part of the activity lifecycle when an activity is going into
+     * the background, but has not (yet) been killed
+     */
+    void onPause();
+
+    /**
+     * Called when you are no longer visible to the user
+     */
+    void onStop();
 }
