@@ -60,8 +60,13 @@ public abstract class KFragment<V extends IView, P extends IPresenter<V>>
         // Inflate the layout for this fragment
         View root = inflater.inflate(getLayoutResourceId(), container, false);
         onBindView(root);
-        onInitialize();
         return root;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        onInitialize();
     }
 
     @Override
