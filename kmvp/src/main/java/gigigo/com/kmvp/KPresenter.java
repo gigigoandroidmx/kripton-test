@@ -87,6 +87,14 @@ public abstract class KPresenter<V extends IView>
     public void onStop() { }
 
     /**
+     * Defines the method to be called when the view raise an exception
+     *
+     * @param exception
+     */
+    @Override
+    public void handleError(Throwable exception) { }
+
+    /**
      * Determines if the view is attached
      * @return <code>true</code>, whether view is attached, otherwise <code>false</code>
      */

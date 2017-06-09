@@ -65,4 +65,10 @@ public interface IPresenter<V extends IView> {
      * Called when you are no longer visible to the user
      */
     void onStop();
+
+    /**
+     * Defines the method to be called when the view raise an exception
+     * @param exception
+     */
+    void handleError(Throwable exception);
 }
