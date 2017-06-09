@@ -140,5 +140,5 @@ public abstract class KPresenter<V extends IView>
         return this.parameters;
     }
 
-
+    public void handleError(Throwable exception) {  }
 }
