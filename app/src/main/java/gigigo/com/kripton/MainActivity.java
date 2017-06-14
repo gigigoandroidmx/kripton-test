@@ -32,6 +32,7 @@ public class MainActivity
         //Select First menu position
         navigationView.getMenu().getItem(0).setChecked(true);
         onNavigationItemSelected(navigationView.getMenu().getItem(0));
+        
     }
 
     @Override
